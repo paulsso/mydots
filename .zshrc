@@ -4,6 +4,20 @@
 # Path to your oh-my-zsh installation.
 export ZSH="/home/oskar/.oh-my-zsh"
 
+LS_COLORS="di=1;33"
+
+export SVN_EDITOR=vim
+
+export GIT_EDITOR=vim
+
+alias howbigis='du -hsc'
+alias disk='df -h'
+alias z='vim ~/.zshrc'
+alias i3='vim ~/.i3/config'
+alias ff='vifm .'
+alias p='python3'
+alias pi='python3 -i'
+
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
@@ -70,7 +84,7 @@ ZSH_THEME="half-life"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git wd)
+plugins=(git wd colored-man-pages)
 
 source $ZSH/oh-my-zsh.sh
 
