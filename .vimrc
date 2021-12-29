@@ -26,10 +26,12 @@ filetype indent on
 set cursorline
 
 " Highlight cursor line underneath the cursor vertically.
-set cursorcolumn
+" set cursorcolumn
 
 augroup project
     autocmd!
     autocmd BufRead,BufNewfile *.h,*.c,*.cpp set filetype=c.doxygen
 augroup END
 
+" uncomment to make comments green (fix for black background)
+":highlight Comment ctermfg=green
