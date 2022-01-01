@@ -59,14 +59,13 @@
 
 /* enums */
 enum { CurNormal, CurResize, CurMove, CurLast }; /* cursor */
-enum { SchemeNorm, SchemeSel, SchemeStatus, SchemeTagsSel, SchemeTagsNorm, SchemeInfoSel, SchemeInfoNorm, Tag0, Tag1, Tag2, Tag3, Tag4, Tag5 }; /* color schemes */
+enum { SchemeNorm, SchemeSel, Tag0, Tag1, Tag2, Tag3, Tag4, Tag5 }; /* color schemes */
 enum { NetSupported, NetWMName, NetWMState, NetWMCheck,
        NetWMFullscreen, NetActiveWindow, NetWMWindowType,
        NetWMWindowTypeDialog, NetClientList, NetLast }; /* EWMH atoms */
 enum { WMProtocols, WMDelete, WMState, WMTakeFocus, WMLast }; /* default atoms */
 enum { ClkTagBar, ClkLtSymbol, ClkStatusText, ClkWinTitle,
        ClkClientWin, ClkRootWin, ClkLast }; /* clicks */
-
 
 typedef union {
 	int i;
@@ -235,7 +234,6 @@ static int xerror(Display *dpy, XErrorEvent *ee);
 static int xerrordummy(Display *dpy, XErrorEvent *ee);
 static int xerrorstart(Display *dpy, XErrorEvent *ee);
 static void zoom(const Arg *arg);
-static void autostart_exec(void);
 
 /* variables */
 static const char broken[] = "broken";
@@ -276,35 +274,6 @@ static Window root, wmcheckwin;
 
 /* compile-time check if all tags fit into an unsigned int bit array. */
 struct NumTags { char limitexceeded[LENGTH(tags) > 31 ? -1 : 1]; };
-
-/* dwm will keep pid's of processes from autostart array and kill them at quit */
-static pid_t *autostart_pids;
-static size_t autostart_len;
-
-/* execute command from autostart array */
-static void
-autostart_exec() {
-   const char *const *p;
-   size_t i = 0;
-
-       /* count entries */
-       for (p = autostart; *p; autostart_len++, p++)
-           while (*++p);
-
-       autostart_pids = malloc(autostart_len * sizeof(pid_t));
-   for (p = autostart; *p; i++, p++) {
-           if ((autostart_pids[i] = fork()) == 0) {
-                   setsid();
-                   execvp(*p, (char *const *)p);
-                   fprintf(stderr, "dwm: execvp %s\n", *p);
-                   perror(" failed");
-                   _exit(EXIT_FAILURE);
-               }
-           /* skip arguments */
-               while (*++p);
-       }
-}
-    
 
 /* function implementations */
 void
@@ -738,7 +707,7 @@ drawbar(Monitor *m)
 
 	/* draw status first so it can be overdrawn by tags later */
 	if (m == selmon) { /* status is only drawn on selected monitor */
-		drw_setscheme(drw, scheme[SchemeStatus]);
+        	drw_setscheme(drw, scheme[SchemeNorm]);
 		tw = TEXTW(stext) - lrpad + 2; /* 2px right padding */
 		drw_text(drw, m->ww - tw, 0, tw, bh, 0, stext, 0);
 	}
@@ -764,6 +733,7 @@ drawbar(Monitor *m)
         case 4: drw_setscheme(drw, scheme[m->tagset[m->seltags] & 1 << i ? Tag0 : Tag5 ]);
             break;
         }
+		//drw_setscheme(drw, scheme[m->tagset[m->seltags] & 1 << i ? SchemeSel : SchemeNorm]);
 		drw_text(drw, x, 0, w, bh, lrpad / 2, tags[i], urg & 1 << i);
 		if (occ & 1 << i)
 			drw_rect(drw, x + boxs, boxs, boxw, boxw,
@@ -772,17 +742,17 @@ drawbar(Monitor *m)
 		x += w;
 	}
 	w = blw = TEXTW(m->ltsymbol);
-	drw_setscheme(drw, scheme[SchemeTagsNorm]);
+	drw_setscheme(drw, scheme[SchemeNorm]);
 	x = drw_text(drw, x, 0, w, bh, lrpad / 2, m->ltsymbol, 0);
 
 	if ((w = m->ww - tw - x) > bh) {
 		if (m->sel) {
-			drw_setscheme(drw, scheme[m == selmon ? SchemeInfoSel : SchemeInfoNorm]);
+			drw_setscheme(drw, scheme[m == selmon ? SchemeSel : SchemeNorm]);
 			drw_text(drw, x, 0, w, bh, lrpad / 2, m->sel->name, 0);
 			if (m->sel->isfloating)
 				drw_rect(drw, x + boxs, boxs, boxw, boxw, m->sel->isfixed, 0);
 		} else {
-			drw_setscheme(drw, scheme[SchemeInfoNorm]);
+			drw_setscheme(drw, scheme[SchemeNorm]);
 			drw_rect(drw, x, 0, w, bh, 1, 1);
 		}
 	}
@@ -1295,16 +1265,6 @@ propertynotify(XEvent *e)
 void
 quit(const Arg *arg)
 {
-   size_t i;
-
-   /* kill child processes */
-   for (i = 0; i < autostart_len; i++) {
-       if (0 < autostart_pids[i]) {
-               kill(autostart_pids[i], SIGTERM);
-               waitpid(autostart_pids[i], NULL, 0);
-       }
-   }
-    
 	running = 0;
 }
 
@@ -1627,7 +1587,7 @@ setup(void)
 	scheme = ecalloc(LENGTH(colors), sizeof(Clr *));
 	for (i = 0; i < LENGTH(colors); i++)
 		scheme[i] = drw_scm_create(drw, colors[i], 3);
-    /* init bars */
+	/* init bars */
 	updatebars();
 	updatestatus();
 	/* supporting window for NetWMCheck */
@@ -1688,24 +1648,9 @@ showhide(Client *c)
 void
 sigchld(int unused)
 {
-    pid_t pid;
-    
 	if (signal(SIGCHLD, sigchld) == SIG_ERR)
 		die("can't install SIGCHLD handler:");
-	while (0 < (pid = waitpid(-1, NULL, WNOHANG))) {
-        pid_t *p, *lim;
-
-        if (!(p = autostart_pids))
-               continue;
-        lim = &p[autostart_len];
-
-        for (; p < lim; p++) {
-        if (*p == pid) {
-            *p = -1;
-            break;
-            }
-        }
-    }
+	while (0 < waitpid(-1, NULL, WNOHANG));
 }
 
 void
@@ -2210,7 +2155,6 @@ main(int argc, char *argv[])
 	if (!(dpy = XOpenDisplay(NULL)))
 		die("dwm: cannot open display");
 	checkotherwm();
-    autostart_exec();
 	setup();
 #ifdef __OpenBSD__
 	if (pledge("stdio rpath proc exec", NULL) == -1)

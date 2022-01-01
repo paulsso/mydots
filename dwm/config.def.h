@@ -5,6 +5,7 @@ static const unsigned int borderpx  = 1;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
+
 static const char *fonts[]          = { "monospace:size=10" };
 static const char dmenufont[]       = "monospace:size=10";
 static const char col_gray1[]       = "#222222";
@@ -12,14 +13,49 @@ static const char col_gray2[]       = "#444444";
 static const char col_gray3[]       = "#bbbbbb";
 static const char col_gray4[]       = "#eeeeee";
 static const char col_cyan[]        = "#005577";
+
+static const char col_green1[]      = "#a3be8c";
+static const char col_green2[]      = "#8cbe8e";
+static const char col_green3[]      = "#8cbea7";
+static const char col_green4[]      = "#bcbe8c";
+static const char col_green5[]      = "#bea78c";
+
+static const char col_cyan1[]        = "#88c0d0";
+static const char col_cyan2[]        = "#889cd0";
+static const char col_cyan3[]        = "#9888d0";
+static const char col_cyan4[]        = "#88d0bc";
+static const char col_cyan5[]        = "#88d090";
+
+static const char col_blue1[]        = "#81a1c1";
+static const char col_blue2[]        = "#8181c1";
+static const char col_blue3[]        = "#a181c1";
+static const char col_blue4[]        = "#81c1c1";
+static const char col_blue5[]        = "#81c1a1";
+
+static const char col_yellow1[]      = "#ebcb8b"; 
+static const char col_yellow2[]      = "#dbeb8b"; 
+static const char col_yellow3[]      = "#abeb8b"; 
+static const char col_yellow4[]      = "#eb9b8b"; 
+static const char col_yellow5[]      = "#eb8bab"; 
+
+static const char col_white[]        = "#000000";
+
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
 	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
-	[SchemeSel]  = { col_gray4, col_cyan,  col_cyan  },
+	[SchemeSel]  = { col_gray4, col_blue1, col_cyan },
+	[Tag0]  =  { col_green1, col_white, "#000000" },
+	[Tag1]  =  { col_white, col_blue1, "#000000" },
+	[Tag2]  =  { col_white, col_blue2, "#000000" },
+	[Tag3]  =  { col_white, col_blue3, "#000000" },
+	[Tag4]  =  { col_white, col_blue4, "#000000" },
+	[Tag5]  =  { col_white, col_blue5, "#000000" }
+
 };
 
+
 /* tagging */
-static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
+static const char *tags[] = { "1", "2", "3", "4", "5" };
 
 static const Rule rules[] = {
 	/* xprop(1):
@@ -62,7 +98,7 @@ static const char *termcmd[]  = { "st", NULL };
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
-	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
+	{ MODKEY|ShiftMask,             XK_d,      spawn,          {.v = dmenucmd } },
 	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
@@ -73,10 +109,12 @@ static Key keys[] = {
 	{ MODKEY,                       XK_l,      setmfact,       {.f = +0.05} },
 	{ MODKEY,                       XK_Return, zoom,           {0} },
 	{ MODKEY,                       XK_Tab,    view,           {0} },
-	{ MODKEY|ShiftMask,             XK_c,      killclient,     {0} },
+	{ MODKEY|ShiftMask,             XK_q,      killclient,     {0} },
 	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
 	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} },
 	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
+	{ MODKEY,                       XK_r,      setlayout,      {.v = &layouts[3]} },
+	{ MODKEY|ShiftMask,             XK_r,      setlayout,      {.v = &layouts[4]} },
 	{ MODKEY,                       XK_space,  setlayout,      {0} },
 	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
 	{ MODKEY,                       XK_0,      view,           {.ui = ~0 } },
@@ -94,7 +132,7 @@ static Key keys[] = {
 	TAGKEYS(                        XK_7,                      6)
 	TAGKEYS(                        XK_8,                      7)
 	TAGKEYS(                        XK_9,                      8)
-	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
+	{ MODKEY|ShiftMask,             XK_e,      quit,           {0} },
 };
 
 /* button definitions */
