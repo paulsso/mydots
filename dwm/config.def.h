@@ -29,6 +29,7 @@ static const char col_cyan5[]        = "#88d090";
 static const char col_blue1[]        = "#81a1c1";
 static const char col_blue2[]        = "#8181c1";
 static const char col_blue3[]        = "#a181c1";
+static const char col_blue3_dark[]   = "#4c2077";
 static const char col_blue4[]        = "#81c1c1";
 static const char col_blue5[]        = "#81c1a1";
 
@@ -43,7 +44,7 @@ static const char col_white[]        = "#000000";
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
 	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
-	[SchemeSel]  = { col_gray4, col_blue1, col_cyan },
+	[SchemeSel]  = { col_gray4, col_blue3_dark, col_cyan },
 	[Tag0]  =  { col_green1, col_white, "#000000" },
 	[Tag1]  =  { col_white, col_blue1, "#000000" },
 	[Tag2]  =  { col_white, col_blue2, "#000000" },
@@ -62,9 +63,10 @@ static const Rule rules[] = {
 	 *	WM_CLASS(STRING) = instance, class
 	 *	WM_NAME(STRING) = title
 	 */
-	/* class      instance    title       tags mask     isfloating   monitor */
-	{ "Gimp",     NULL,       NULL,       0,            1,           -1 },
-	{ "Firefox",  NULL,       NULL,       1 << 8,       0,           -1 },
+	/* class      	     instance    title    tags mask     isfloating   CenterThisWindow?     monitor */
+	{ "st",              NULL,       NULL,    0,            0,     	     1,		           -1 },
+	{ "Gimp",            NULL,       NULL,    0,            1,           0,                    -1 },
+	{ "Firefox",         NULL,       NULL,    1 << 8,       0,           0,                    -1 },
 };
 
 /* layout(s) */
@@ -92,9 +94,10 @@ static const Layout layouts[] = {
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 
 /* commands */
+static char opacity[4] = "0.9";
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
-static const char *termcmd[]  = { "st", NULL };
+static const char *termcmd[]  = { "st", "-A", opacity, NULL };
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
