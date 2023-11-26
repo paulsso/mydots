@@ -3,7 +3,7 @@
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
-
+export PATH=$PATH:"$HOME/.local/bin"
 LS_COLORS="di=1;33"
 
 export SVN_EDITOR=vim
