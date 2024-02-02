@@ -31,10 +31,6 @@ set $down j
 set $left h
 set $right l 
 
-for_window [class=".*"] border pixel 0
-gaps inner 10
-gaps outer 20
-
 # use Mouse+Mod1 to drag floating windows to their wanted position
 floating_modifier Mod1
 
