@@ -302,6 +302,8 @@ mode "$mode_gaps_left" {
 #######################################################################
 # exec i3-config-wizard
 
+# I copied the structure of this coloring scheme from the Dracula project
+# but changed around the colors a bit to make it monokai
 # class                 border  bground text    indicator child_border
 client.focused          #529B2F #49483E #FB6060 #A3E076   #529B2F
 client.focused_inactive #22272D #22272D #F8F8F0 #22272D   #22272D
