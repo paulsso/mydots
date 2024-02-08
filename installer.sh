@@ -94,7 +94,7 @@ case $i3yn in
             handle_error || continue
         fi
         
-        if ! sudo apt install suckless-tools; then
+        if ! sudo apt install suckless-tools lxappearance; then
             handle_error || continue
         fi
 

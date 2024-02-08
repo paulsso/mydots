@@ -308,7 +308,7 @@ mode "$mode_gaps_left" {
 client.focused          #529B2F #49483E #FB6060 #A3E076   #529B2F
 client.focused_inactive #22272D #22272D #F8F8F0 #22272D   #22272D
 client.unfocused        #292E36 #292E36 #FD971F #292E36   #292E36
-client.urgent           #22272D #FFD569 #F8F8F0 #FFD569   #FFD569
+client.urgent           #22272D #FB6060 #F8F8F0 #FFD569   #FFD569
 client.placeholder      #292E36 #292E36 #F8F8F0 #292E36   #292E36
 
 client.background       #F8F8F0
@@ -322,11 +322,12 @@ bar {
     focused_workspace  #108498 #108498 #A3E076
     active_workspace   #292E36 #22272D #F5F5F5
     inactive_workspace #292E36 #292E36 #BFBFBF
-    urgent_workspace   #FFD569 #FFD569 #F8F8F0
+    urgent_workspace   #FB6060 #FB6060 #F8F8F0
     binding_mode       #FFD569 #FFD569 #F8F8F0
   }
 }
 
 bindsym Mod1+d exec "dmenu_run -nf '#FFD569' -nb '#292E36' -sb '#108498' -sf '#F5F5F5' -fn 'monospace-10' -p 'run'"
 
+exec xrandr --output HDMI-1 --mode 3440x1440 --above eDP-1
 exec feh --bg-scale $HOME/Pictures/chaotic-colors-3840×2160.jpg
