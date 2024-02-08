@@ -1,9 +1,11 @@
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
+export MX="D0:0A:3A:47:C3:34"
+export XM="88:C9:E8:7D:43:B8"
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
-export PATH=$PATH:"$HOME/.local/bin"
+export PATH=$PATH:"$HOME/.local/bin":"$HOME/.cargo/bin"
 LS_COLORS="di=1;33"
 
 export SVN_EDITOR=vim
@@ -25,7 +27,7 @@ alias ll='ls -l'
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="custom_half_life"
+ZSH_THEME="half-life"
 plugins=(git wd colored-man-pages)
 
 source $ZSH/oh-my-zsh.sh
