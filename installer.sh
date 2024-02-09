@@ -35,6 +35,8 @@ read -p "Install neovim? (Y/n): " nvyn
 
 case $nvyn in
     [Yy]* | "" )
+        sudo apt update
+        sudo apt install vifm
         wget -c https://github.com/neovim/neovim/releases/download/v0.9.5/nvim-linux64.tar.gz -O nvim-linux64.tar.gz
         tar xzvf nvim-linux64.tar.gz
         sudo cp -r nvim-linux64 /usr/bin
@@ -51,17 +53,9 @@ case $alyn in
         sudo apt update
         sudo apt install cmake pkg-config libfreetype6-dev libfontconfig1-dev libxcb-xfixes0-dev libxkbcommon-dev python3
         
-        if ! curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh; then
-            handle_error || continue
-        fi
-        
-        if ! rustup override set stable; then
-            handle_error || continue
-        fi
-
-        if ! rustup update stable; then
-            handle_error || continue
-        fi
+        curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+        rustup override set stable
+        rustup update stable
 
         git clone https://github.com/alacritty/alacritty.git
         cd alacritty

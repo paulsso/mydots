@@ -14,9 +14,6 @@ export GIT_EDITOR=vim
 
 alias howbigis='du -hsc'
 alias disk='df -h'
-alias z='vim ~/.zshrc'
-alias i3='vim ~/.i3/config'
-alias termin='vim ~/.config/terminator/config'
 alias ff='vifm .'
 alias p='python3'
 alias pi='python3 -i'
@@ -28,7 +25,7 @@ alias ll='ls -l'
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 ZSH_THEME="half-life"
-plugins=(git wd colored-man-pages)
+plugins=(git wd colored-man-pages zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 
