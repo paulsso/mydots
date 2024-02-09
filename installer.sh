@@ -112,7 +112,8 @@ read -p "Apply configuration files? (Y/n): " yn
 
 case $yn in
     [Yy]* | "")
-        cp $HOME/mydots/.config $HOME;;
+        cp $HOME/mydots/.config $HOME
+        cp $HOME/mydots/.fonts $HOME;;
     [Nn]* ) echo "Skipping configuration files" ;;
 esac
 
