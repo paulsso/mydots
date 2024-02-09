@@ -35,11 +35,11 @@ read -p "Install neovim? (Y/n): " nvyn
 
 case $nvyn in
     [Yy]* | "" )
-        wget -c https://github.com/neovim/neovim/releases/latest/download/nvim.appimage -O nvim.appimage
-        chmod u+x nvim.appimage
-        sudo cp nvim.appimage /usr/bin/nvim
-        rm nvim.appimage
-        cd /tmp
+        wget -c https://github.com/neovim/neovim/releases/download/v0.9.5/nvim-linux64.tar.gz -O nvim-linux64.tar.gz
+        tar xzvf nvim-linux64.tar.gz
+        sudo cp -r nvim-linux64 /usr/bin
+        sudo ln -s /usr/bin/nvim-linux64/bin/nvim /usr/bin/nvim
+        sudo ln -s /usr/bin/nvim-linux64/bin/nvim /usr/bin/vim
         ;;
     [Nn]* ) echo "Skipping neovim." ;; # Exit the script with an error
 esac
