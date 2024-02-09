@@ -13,7 +13,7 @@ handle_error() {
     done
 }
 
-read -p "Install zsh and ohmyzsh? (Y/n)" zsyn
+read -p "Install zsh and ohmyzsh? (Y/n): " zsyn
 
 case $zsyn in
     [Yy]* | "" )
@@ -27,10 +27,10 @@ case $zsyn in
         git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
         ~/.fzf/install
         ;;
-    [Nn]* ) echo "Skipping zsh."; exit 1;; # Exit the script with an error
+    [Nn]* ) echo "Skipping zsh." ;; # Continue running script
 esac
 
-read -p "Install neovim? (Y/n)" nvyn
+read -p "Install neovim? (Y/n): " nvyn
 
 case $nvyn in
     [Yy]* | "" )
@@ -39,10 +39,10 @@ case $nvyn in
         sudo cp nvim.appimage /usr/bin/nvim
         rm nvim.appimage
         ;;
-    [Nn]* ) echo "Skipping neovim."; exit 1;; # Exit the script with an error
+    [Nn]* ) echo "Skipping neovim." ;; # Exit the script with an error
 esac
 
-read -p "Install Alacritty? (Y/n)" alyn
+read -p "Install Alacritty? (Y/n): " alyn
 
 case $alyn in
     [Yy]* | "" )
@@ -68,10 +68,10 @@ case $alyn in
         cd /tmp
         rm -rf alacritty
         ;;
-    [Nn]* ) echo "Skipping Alacritty."; exit 1;; # Exit the script with an error
+    [Nn]* ) echo "Skipping Alacritty." ;; # Exit the script with an error
 esac
 
-read -p "Install i3? (Y/n)" i3yn
+read -p "Install i3? (Y/n): " i3yn
 
 case $i3yn in
     [Yy]* | "" )
@@ -109,13 +109,15 @@ case $i3yn in
         rm -rf i3-4.23 
         exec i3
         ;;
-    [Nn]* ) echo "Skipping i3."; exit 1;; # Exit the script with an error
+    [Nn]* ) echo "Skipping i3." ;; # Exit the script with an error
 esac
 
-read -p "Apply configuration files? (Y/n)" yn
+read -p "Apply configuration files? (Y/n): " yn
 
 case $yn in
     [Yy]* | "")
         cp $HOME/mydots/.config $HOME;;
-    [Nn]* ) echo "Skipping configuration files"; exit 1;;
+    [Nn]* ) echo "Skipping configuration files" ;;
 esac
+
+exit 0
