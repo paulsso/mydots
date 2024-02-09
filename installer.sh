@@ -26,6 +26,7 @@ case $zsyn in
         git clone --depth 1 -- https://github.com/marlonrichert/zsh-autocomplete.git $ZSH_CUSTOM/plugins/zsh-autocomplete
         git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
         ~/.fzf/install
+        cd /tmp
         ;;
     [Nn]* ) echo "Skipping zsh." ;; # Continue running script
 esac
@@ -34,10 +35,11 @@ read -p "Install neovim? (Y/n): " nvyn
 
 case $nvyn in
     [Yy]* | "" )
-        curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
+        wget -c https://github.com/neovim/neovim/releases/latest/download/nvim.appimage -O nvim.appimage
         chmod u+x nvim.appimage
         sudo cp nvim.appimage /usr/bin/nvim
         rm nvim.appimage
+        cd /tmp
         ;;
     [Nn]* ) echo "Skipping neovim." ;; # Exit the script with an error
 esac
