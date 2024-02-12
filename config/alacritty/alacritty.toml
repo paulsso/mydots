@@ -1,20 +1,20 @@
 [font]
-size = 10.0
+size = 11.0
 
 [font.bold]
-family = "Agave"
+family = "mononoki"
 style = "Bold"
 
 [font.bold_italic]
-family = "Agave"
+family = "mononoki"
 style = "Bold Italic"
 
 [font.italic]
-family = "Agave"
+family = "mononoki"
 style = "Italic"
 
 [font.normal]
-family = "Agave"
+family = "mononoki"
 style = "Regular"
 
 [keyboard]

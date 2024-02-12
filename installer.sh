@@ -1,120 +1,113 @@
 #!/bin/bash
-cd /tmp
 
-# Function to handle errors
+# Navigate to the /tmp directory at the start of the script
+cd /tmp || { echo "Failed to change directory to /tmp"; exit 1; }
+
+# Function to update and install packages
+apt_install() {
+    sudo apt update && sudo apt install -y "$@"
+}
+
+# Improved error handling function
 handle_error() {
     echo "An error occurred."
     while true; do
-        read -p "Do you want to try again? (y/n): " yn
+        read -rp "Do you want to try again? (y/n): " yn
         case $yn in
-            [Yy]* | "" ) return 0;; # Return 0 to indicate a retry
-            [Nn]* ) echo "Exiting script."; exit 1;; # Exit the script with an error
+            [Yy]* | "" ) return 0;; # Allow retry
+            [Nn]* ) echo "Exiting script."; exit 1;; # Exit script with error
         esac
     done
 }
 
-read -p "Install zsh and ohmyzsh? (Y/n): " zsyn
+# Function to prompt for installation
+prompt_install() {
+    local prompt_message="$1"
+    local install_command="$2"
+    
+    read -rp "$prompt_message (Y/n): " response
+    if [[ $response =~ ^[Yy]*$ ]] || [[ -z $response ]]; then
+        eval "$install_command" || handle_error
+    else
+        echo "Skipping $prompt_message."
+    fi
+}
 
-case $zsyn in
-    [Yy]* | "" )
-        sudo apt update
-        sudo apt install zsh
-        sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-        git clone https://github.com/zsh-users/zsh-autosuggestions.git $ZSH_CUSTOM/plugins/zsh-autosuggestions
-        git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $ZSH_CUSTOM/plugins/zsh-syntax-highlighting
-        git clone https://github.com/zdharma-continuum/fast-syntax-highlighting.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/fast-syntax-highlighting
-        git clone --depth 1 -- https://github.com/marlonrichert/zsh-autocomplete.git $ZSH_CUSTOM/plugins/zsh-autocomplete
-        git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
-        ~/.fzf/install
-        cd /tmp
-        ;;
-    [Nn]* ) echo "Skipping zsh." ;; # Continue running script
-esac
+# Zsh and Oh-My-Zsh Installation
+install_zsh() {
+    apt_install zsh
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+    git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+    git clone https://github.com/zsh-users/zsh-syntax-highlighting ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+    git clone https://github.com/zdharma-continuum/fast-syntax-highlighting ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/fast-syntax-highlighting
+    git clone --depth 1 https://github.com/marlonrichert/zsh-autocomplete ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-autocomplete
+    git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+    ~/.fzf/install
+}
 
-read -p "Install neovim? (Y/n): " nvyn
+# Neovim Installation
+install_neovim() {
+    apt_install vifm
+    wget -c https://github.com/neovim/neovim/releases/download/v0.9.5/nvim-linux64.tar.gz -O nvim-linux64.tar.gz
+    tar xzvf nvim-linux64.tar.gz
+    sudo cp -r nvim-linux64 /usr/local/ # Use /usr/local for software not managed by apt
+    sudo ln -sf /usr/local/nvim-linux64/bin/nvim /usr/local/bin/nvim
+    sudo ln -sf /usr/local/bin/nvim /usr/local/bin/vim
+}
 
-case $nvyn in
-    [Yy]* | "" )
-        sudo apt update
-        sudo apt install vifm
-        wget -c https://github.com/neovim/neovim/releases/download/v0.9.5/nvim-linux64.tar.gz -O nvim-linux64.tar.gz
-        tar xzvf nvim-linux64.tar.gz
-        sudo cp -r nvim-linux64 /usr/bin
-        sudo ln -s /usr/bin/nvim-linux64/bin/nvim /usr/bin/nvim
-        sudo ln -s /usr/bin/nvim-linux64/bin/nvim /usr/bin/vim
-        ;;
-    [Nn]* ) echo "Skipping neovim." ;; # Exit the script with an error
-esac
+# Alacritty Installation
+install_alacritty() {
+    apt_install cmake pkg-config libfreetype6-dev libfontconfig1-dev libxcb-xfixes0-dev libxkbcommon-dev python3
+    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+    source $HOME/.cargo/env # Ensure Rust environment is active
+    rustup override set stable
+    rustup update stable
+    git clone https://github.com/alacritty/alacritty.git
+    cd alacritty || return
+    cargo build --release
+    sudo cp target/release/alacritty /usr/local/bin/alacritty # Use /usr/local/bin
+    cd ..
+    rm -rf alacritty
+}
 
-read -p "Install Alacritty? (Y/n): " alyn
+# i3 Installation
+install_i3() {
+    if ! apt_install wget libxcb1-dev libxcb-keysyms1-dev libpango1.0-dev \
+                     libxcb-util0-dev libxcb-icccm4-dev libyajl-dev \
+                     libstartup-notification0-dev libxcb-randr0-dev \
+                     libev-dev libxcb-cursor-dev libxcb-xinerama0-dev \
+                     libxcb-xkb-dev libxkbcommon-dev libxkbcommon-x11-dev \
+                     autoconf libxcb-xrm0 libxcb-xrm-dev automake \
+                     libxcb-shape0-dev pkg-config meson; then
+        handle_error
+    fi
 
-case $alyn in
-    [Yy]* | "" )
-        sudo apt update
-        sudo apt install cmake pkg-config libfreetype6-dev libfontconfig1-dev libxcb-xfixes0-dev libxkbcommon-dev python3
-        
-        curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-        rustup override set stable
-        rustup update stable
+    wget -c https://i3wm.org/downloads/i3-4.23.tar.xz -O i3-4.23.tar.xz || handle_error
+    tar xfv i3-4.23.tar.xz || handle_error
+    cd i3-4.23 || return
+    mkdir -p build && cd build || return
+    meson ..
+    ninja
+    sudo ninja install
+    sudo cp "$HOME/mydots/xsessions/i3.desktop" /usr/share/xsessions/i3.desktop
+    cd ../..
+    rm -rf i3-4.23
+}
 
-        git clone https://github.com/alacritty/alacritty.git
-        cd alacritty
-        cargo build --release
-        sudo cp target/release/alacritty /usr/bin/alacritty
-        cd /tmp
-        rm -rf alacritty
-        ;;
-    [Nn]* ) echo "Skipping Alacritty." ;; # Exit the script with an error
-esac
+# Apply configuration files
+apply_config_files() {
+    ln -s $HOME/mydots/config/i3 $HOME/.config/i3
+    ln -s $HOME/mydots/config/alacritty $HOME/.config/alacritty
+    ln -s $HOME/mydots/config/nvim $HOME/.config/nvim
+    cp -r $HOME/mydots/.fonts $HOME/.fonts
+}
 
-read -p "Install i3? (Y/n): " i3yn
+# Main installation prompts
+prompt_install "Install zsh and ohmyzsh?" install_zsh
+prompt_install "Install neovim?" install_neovim
+prompt_install "Install Alacritty?" install_alacritty
+prompt_install "Install i3?" install_i3
+prompt_install "Apply configuration files?" apply_config_files
 
-case $i3yn in
-    [Yy]* | "" )
-        sudo apt update
-        if ! sudo apt install wget libxcb1-dev libxcb-keysyms1-dev libpango1.0-dev \
-                         libxcb-util0-dev libxcb-icccm4-dev libyajl-dev \
-                         libstartup-notification0-dev libxcb-randr0-dev \
-                         libev-dev libxcb-cursor-dev libxcb-xinerama0-dev \
-                         libxcb-xkb-dev libxkbcommon-dev libxkbcommon-x11-dev \
-                         autoconf libxcb-xrm0 libxcb-xrm-dev automake \
-                         libxcb-shape0-dev pkg-config meson; then
-            handle_error || continue
-        fi
-
-        if ! wget -c https://i3wm.org/downloads/i3-4.23.tar.xz -O i3-4.23.tar.xz; then
-            handle_error || continue
-        fi
-        
-        if ! tar xfv i3-4.23.tar.xz; then
-            handle_error || continue
-        fi
-        
-        if ! sudo apt install suckless-tools lxappearance; then
-            handle_error || continue
-        fi
-
-        cd i3-4.23
-        mkdir build
-        cd build
-        meson ..
-        ninja
-        sudo ninja install
-        sudo cp $HOME/mydots/xsessions/i3.desktop /usr/share/xsessions/i3.desktop
-        cd /tmp
-        rm -rf i3-4.23 
-        exec i3
-        ;;
-    [Nn]* ) echo "Skipping i3." ;; # Exit the script with an error
-esac
-
-read -p "Apply configuration files? (Y/n): " yn
-
-case $yn in
-    [Yy]* | "")
-        cp $HOME/mydots/.config $HOME
-        cp $HOME/mydots/.fonts $HOME;;
-    [Nn]* ) echo "Skipping configuration files" ;;
-esac
-
+echo "Setup complete."
 exit 0
