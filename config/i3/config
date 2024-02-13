@@ -318,7 +318,7 @@ bar {
   padding 0 5px
   font pango:Agave-Bold 10
   separator_symbol "~"
-
+  status_command i3blocks
 #  status_command i3status
 
   colors {
@@ -330,10 +330,25 @@ bar {
     active_workspace   #292E36 #22272D #FFD569
     inactive_workspace #292E36 #22272D #FFD569
     urgent_workspace   #FB6060 #FB6060 #F8F8F0
-    binding_mode       #FFD569 #FFD569 #F8F8F0
+    binding_mode       #A3E076 #22272D #FB6060
   }
 }
 
 bindsym Mod1+d exec "dmenu_run -nf '#FFD569' -nb '#292E36' -sb '#108498' -sf '#F8F8F0' -fn 'Agave-Bold-16' -p 'run'"
 
 exec feh --bg-scale $HOME/Pictures/chaotic-colors-3840×2160.jpg
+
+set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
+mode "$mode_system" {
+    bindsym l exec --no-startup-id i3exit lock, mode "default"
+    bindsym e exec --no-startup-id i3exit logout, mode "default"
+    bindsym s exec --no-startup-id i3exit suspend, mode "default"
+    bindsym h exec --no-startup-id i3exit hibernate, mode "default"
+    bindsym r exec --no-startup-id i3exit reboot, mode "default"
+    bindsym Shift+s exec --no-startup-id i3exit shutdown, mode "default"
+
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+bindsym Mod1+Pause mode "$mode_system"
