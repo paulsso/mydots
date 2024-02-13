@@ -94,11 +94,24 @@ install_i3() {
     rm -rf i3-4.23
 }
 
+install_i3blocks() {
+    cd /tmp
+    git clone https://github.com/vivien/i3blocks
+    cd i3blocks
+    ./autogen.sh
+    ./configure
+    make
+    make install
+    cd /tmp
+    rm -rf i3blocks
+}
+
 # Apply configuration files
 apply_config_files() {
     ln -s $HOME/mydots/config/i3 $HOME/.config/i3
     ln -s $HOME/mydots/config/alacritty $HOME/.config/alacritty
     ln -s $HOME/mydots/config/nvim $HOME/.config/nvim
+    ln -s $HOME/mydots/config/i3blocks $HOME/.config/i3blocks
     cp -r $HOME/mydots/.fonts $HOME/.fonts
 }
 
@@ -107,6 +120,7 @@ prompt_install "Install zsh and ohmyzsh?" install_zsh
 prompt_install "Install neovim?" install_neovim
 prompt_install "Install Alacritty?" install_alacritty
 prompt_install "Install i3?" install_i3
+prompt_install "Install i3blocks?" install_i3blokcs
 prompt_install "Apply configuration files?" apply_config_files
 
 echo "Setup complete."
