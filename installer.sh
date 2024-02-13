@@ -113,6 +113,7 @@ apply_config_files() {
     ln -s $HOME/mydots/config/nvim $HOME/.config/nvim
     ln -s $HOME/mydots/config/i3blocks $HOME/.config/i3blocks
     ln -s $HOME/mydots/config/i3/i3exit /usr/bin/i3exit
+    ln -s $HOME/mydots/.zshrc $HOME/.zshrc
     cp -r $HOME/mydots/.fonts $HOME/.fonts
 }
 
