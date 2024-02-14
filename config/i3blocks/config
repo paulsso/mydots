@@ -1,3 +1,10 @@
+# Define the custom separator in global properties for boilerplate
+full_text=|
+align=center
+color=#F8F8F0
+separator=false
+separator_block_width=7
+
 # Update time every 5 seconds
 [time]
 markup=pango
@@ -5,6 +12,8 @@ align=center
 command=date +%T
 interval=5
 color=#FD971F
+
+[separator]
 
 [crypto]
 label=₿
@@ -14,6 +23,8 @@ instance=bitcoin
 command=/usr/bin/crypto # CHANGE ME
 color=#FFD569
 
+[separator]
+
 [crypto]
 label=
 markup=pango
@@ -22,6 +33,8 @@ instance=cardano
 command=/usr/bin/crypto # CHANGE ME
 color=#66D9EF
 
+[separator]
+
 [crypto]
 label=
 markup=pango
@@ -29,6 +42,8 @@ interval=63
 instance=ethereum
 command=/usr/bin/crypto # CHANGE ME
 color=#B287FF
+
+[separator]
 
 # Guess the weather hourly
 [weather]
