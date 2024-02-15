@@ -1,6 +1,15 @@
-# Project setup configuration
-GITHUB_USER=your_github_username
-REPO_NAME=your_repo_name
+# Check if required variables are provided
+ifndef GITHUB_USER
+$(error GITHUB_USER is not set)
+endif
+
+ifndef REPO_NAME
+$(error REPO_NAME is not set)
+endi
+
+# Directory where the repo shall be located locally
+WORKDIR=$(HOME)/$(REPO_NAME)
+
 # Ensure you have GITHUB_TOKEN set in your environment variables for security
 # export GITHUB_TOKEN=your_github_token_here
 
@@ -21,7 +30,8 @@ install-gh:
 
 # Create project directories
 dirs:
-    @for dir in $(DIRS); do \
+    @mkdir $(WORKDIR); cd $(WORKDIR)
+    for dir in $(DIRS); do \
         mkdir -p $$dir; \
         echo "Created $$dir directory"; \
     done

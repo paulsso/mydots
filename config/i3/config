@@ -319,7 +319,6 @@ bar {
   font pango:Agave-Bold 10
   separator_symbol "~"
   status_command i3blocks
-#  status_command i3status
 
   colors {
     background #22272D 
@@ -338,7 +337,7 @@ bindsym Mod1+d exec "dmenu_run -nf '#FFD569' -nb '#292E36' -sb '#108498' -sf '#F
 
 exec feh --bg-scale $HOME/Pictures/chaotic-colors-3840×2160.jpg
 
-set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
+set $mode_system System lock (l), logout (e), suspend (s), hibernate (h), reboot (r), shutdown (Shift+s)
 mode "$mode_system" {
     bindsym l exec --no-startup-id i3exit lock, mode "default"
     bindsym e exec --no-startup-id i3exit logout, mode "default"
