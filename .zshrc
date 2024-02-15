@@ -1,17 +1,8 @@
-# If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
-
-export MX="D0:0A:3A:47:C3:34"
-export XM="88:C9:E8:7D:43:B8"
-# Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
-export PATH=$PATH:"$HOME/.local/bin":"$HOME/.cargo/bin"
+export PATH=$PATH:"/usr/local/go/bin":"$HOME/.local/bin":"$HOME/.cargo/bin"
 LS_COLORS="di=1;33"
-
 export SVN_EDITOR=vim
-
 export GIT_EDITOR=vim
-
 alias howbigis='du -hsc'
 alias disk='df -h'
 alias ff='vifm .'
