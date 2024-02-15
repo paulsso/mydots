@@ -95,7 +95,17 @@ install_i3() {
     meson ..
     ninja
     sudo ninja install
-    sudo cp "$HOME/mydots/xsessions/i3.desktop" /usr/share/xsessions/i3.desktop
+    
+    echo "[Desktop Entry]
+    Name=i3 
+    Comment=improved dynamic tiling window manager  
+    Exec=i3 
+    TryExec=i3 
+    Type=Application 
+    X-LightDM-DesktopName=i3 
+    DesktopNames=i3  
+    Keywords=tiling;wm;windowmanager;window;manager;" > /usr/share/xsessions/i3.desktop
+
     cd ../..
     rm -rf i3-4.23
 }
