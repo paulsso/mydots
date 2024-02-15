@@ -18,7 +18,7 @@ color=#CCCCCC
 [crypto]
 label=ɱ
 markup=pango
-interval=60
+interval=600
 instance=monero
 command=/usr/bin/crypto # CHANGE ME
 color=#FD971F
@@ -28,7 +28,7 @@ color=#FD971F
 [crypto]
 label=₿
 markup=pango
-interval=60
+interval=603
 instance=bitcoin
 command=/usr/bin/crypto # CHANGE ME
 color=#FFD569
@@ -38,7 +38,7 @@ color=#FFD569
 [crypto]
 label=₳
 markup=pango
-interval=57
+interval=597
 instance=cardano
 command=/usr/bin/crypto # CHANGE ME
 color=#66D9EF
@@ -48,7 +48,7 @@ color=#66D9EF
 [crypto]
 label=Ξ
 markup=pango
-interval=63
+interval=606
 instance=ethereum
 command=/usr/bin/crypto # CHANGE ME
 color=#B287FF
