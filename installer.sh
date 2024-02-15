@@ -55,9 +55,15 @@ install_neovim() {
     sudo ln -sf /usr/local/bin/nvim /usr/local/bin/vim
 }
 
+# install pyton-pip
+install_python_pip() {
+    sudo apt update
+    sudo apt install python3.10 python3-pip python3.10-venv
+}
+
 # Alacritty Installation
 install_alacritty() {
-    apt_install cmake pkg-config libfreetype6-dev libfontconfig1-dev libxcb-xfixes0-dev libxkbcommon-dev python3
+    apt_install cmake pkg-config libfreetype6-dev libfontconfig1-dev libxcb-xfixes0-dev libxkbcommon-dev
     curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
     source $HOME/.cargo/env # Ensure Rust environment is active
     rustup override set stable
@@ -94,6 +100,7 @@ install_i3() {
     rm -rf i3-4.23
 }
 
+# Install i3 blovks
 install_i3blocks() {
     cd /tmp
     git clone https://github.com/vivien/i3blocks
@@ -104,6 +111,42 @@ install_i3blocks() {
     make install
     cd /tmp
     rm -rf i3blocks
+}
+
+# Go installation
+install_go() {
+    cd /tmp
+    wget -c https://go.dev/dl/go1.22.0.linux-amd64.tar.gz -O go1.22.0.linux-amd64.tar.gz
+    rm -rf /usr/local/go && tar -C /usr/local -xzf go1.22.0.linux-amd64.tar.gz
+}
+
+# Install gcc
+install_gcc() {
+    sudo apt update
+    sudo apt install build-essential manpages-dev
+}
+# install docker
+install_docker() {
+    # Remove old/unofficial
+    for pkg in docker.io docker-doc docker-compose docker-compose-v2 podman-docker containerd runc; do sudo apt-get remove $pkg; done
+
+    # Add Docker's oficial GPG key:
+    sudo apt-get update
+    sudo apt-get install ca-certificates curl gnupg
+    sudo install -m 0755 -d /etc/apt/keyrings
+    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+    sudo chmod a+r /etc/apt/keyrings/docker.gpg
+
+    # Add the repository to Apt sources:
+    echo \
+      "deb [arch="$(dpkg --print-architecture)" signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
+      "$(. /etc/os-release && echo "$VERSION_CODENAME")" stable" | \
+      sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+    sudo apt-get update
+
+    # Install docker v 24
+    export VERSION_STRING=5:24.0.0-1~ubuntu.22.04~jammy
+    sudo apt-get install docker-ce=$VERSION_STRING docker-ce-cli=$VERSION_STRING containerd.io docker-buildx-plugin docker-compose-plugin
 }
 
 # Apply configuration files
@@ -117,12 +160,17 @@ apply_config_files() {
     cp -r $HOME/mydots/.fonts $HOME/.fonts
 }
 
+# Main development tools
+install_python_pip || handle_errors
+install_go || handle_errors
+install_docker || handle_errors
+install_gcc || handle_errors
+
 # Main installation prompts
 prompt_install "Install zsh and ohmyzsh?" install_zsh
 prompt_install "Install neovim?" install_neovim
 prompt_install "Install Alacritty?" install_alacritty
-prompt_install "Install i3?" install_i3
-prompt_install "Install i3blocks?" install_i3blokcs
+prompt_install "Install i3?" install_i3 install_i3blocks
 prompt_install "Apply configuration files?" apply_config_files
 
 echo "Setup complete."
