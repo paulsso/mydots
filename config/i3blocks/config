@@ -1,5 +1,5 @@
 # Define the custom separator in global properties for boilerplate
-full_text=|
+full_text=} ~ {
 align=center
 color=#F8F8F0
 separator=false
@@ -11,6 +11,16 @@ markup=pango
 align=center
 command=date +%T
 interval=5
+color=#CCCCCC
+
+[separator]
+
+[crypto]
+label=ɱ
+markup=pango
+interval=60
+instance=monero
+command=/usr/bin/crypto # CHANGE ME
 color=#FD971F
 
 [separator]
@@ -26,7 +36,7 @@ color=#FFD569
 [separator]
 
 [crypto]
-label=
+label=₳
 markup=pango
 interval=57
 instance=cardano
@@ -36,7 +46,7 @@ color=#66D9EF
 [separator]
 
 [crypto]
-label=
+label=Ξ
 markup=pango
 interval=63
 instance=ethereum
@@ -50,6 +60,6 @@ color=#B287FF
 markup=pango
 command=curl -Ss 'https://wttr.in?0&T&Q' | cut -c 16- | head -2 | xargs echo
 interval=3600
-color=#66D9EF
+color=#CCCCCC
 align=center
 
