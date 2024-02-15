@@ -158,7 +158,7 @@ apply_config_files() {
     ln -s $HOME/mydots/config/i3/i3exit /usr/bin/i3exit
     ln -s $HOME/mydots/config/zshrc $HOME/.config/zshrc
     ln -s $HOME/.config/zshrc/config $HOME/.zshrc
-    cp -r $HOME/mydots/.fonts $HOME/.fonts
+    cp -r $HOME/mydots/fonts $HOME/.fonts
 }
 
 # Main development tools
