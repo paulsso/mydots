@@ -96,7 +96,7 @@ install_i3() {
     ninja
     sudo ninja install
     
-    echo "[Desktop Entry]
+    sudo echo "[Desktop Entry]
     Name=i3 
     Comment=improved dynamic tiling window manager  
     Exec=i3 
