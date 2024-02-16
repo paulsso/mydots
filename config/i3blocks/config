@@ -16,12 +16,31 @@ color=#CCCCCC
 [separator]
 
 [crypto]
-label=ɱ
+label=
 markup=pango
-interval=600
-instance=monero
+interval=611
+instance=chainlink
 command=/usr/bin/crypto # CHANGE ME
+color=#108498
+
+[separator]
+
+[crypto]
+label=
+markup=pango
+interval=609
+instance=fetc09command=/usr/bin/crypto # CHANGE ME
 color=#FD971F
+
+[separator]
+
+[crypto]
+label=
+markup=pango
+interval=595
+instance=nervos-network
+command=/usr/bin/crypto # CHANGE ME
+color=#A3E076
 
 [separator]
 
