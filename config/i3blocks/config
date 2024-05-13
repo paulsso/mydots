@@ -28,16 +28,6 @@ color=#108498
 [crypto]
 label=
 markup=pango
-interval=609
-instance=fetch
-command=/usr/bin/crypto # CHANGE ME
-color=#FD971F
-
-[separator]
-
-[crypto]
-label=
-markup=pango
 interval=595
 instance=nervos-network
 command=/usr/bin/crypto # CHANGE ME
