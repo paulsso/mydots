@@ -305,13 +305,22 @@ mode "$mode_gaps_left" {
 # I copied the structure of this coloring scheme from the Dracula project
 # but changed around the colors a bit to make it monokai
 # class                 border  bground text    indicator child_border
-client.focused          #529B2F #49483E #FB6060 #A3E076   #529B2F
-client.focused_inactive #22272D #22272D #F8F8F0 #22272D   #22272D
-client.unfocused        #292E36 #292E36 #FD971F #292E36   #292E36
-client.urgent           #22272D #FB6060 #F8F8F0 #FFD569   #FFD569
+
+# Monokai colors
+# client.focused          #529B2F #49483E #FB6060 #A3E076   #529B2F
+# client.focused_inactive #22272D #22272D #F8F8F0 #22272D   #22272D
+# client.unfocused        #292E36 #292E36 #FD971F #292E36   #292E36
+# client.urgent           #22272D #FB6060 #F8F8F0 #FFD569   #FFD569
+# client.placeholder      #292E36 #292E36 #F8F8F0 #292E36   #292E36
+
+# Light blue colors
+client.focused          #35A7FF #35A7FF #FFFFFF #FFFFFF   #35A7FF
+client.focused_inactive #38619C #38619C #FFFFFF #FFFFFF   #38619C
+client.unfocused        #38618C #38618C #FFFFFF #FFFFFF   #38618C
+client.urgent           #FF5964 #FF5964 #FFFFFF #FFFFFF   #FF5964
 client.placeholder      #292E36 #292E36 #F8F8F0 #292E36   #292E36
 
-client.background       #F8F8F0
+client.background       #FFFFFF
 
 bar {
   position top
@@ -321,14 +330,28 @@ bar {
   status_command i3blocks
 
   colors {
-    background #22272D 
-    statusline #F8F8F0
-    separator  #22272D
+# Monoka colors
+#     background #22272D 
+#     statusline #F8F8F0
+#     separator  #22272D
 
-    focused_workspace  #A3E076 #22272D #FB6060
-    active_workspace   #292E36 #22272D #FFD569
-    inactive_workspace #292E36 #22272D #FFD569
-    urgent_workspace   #FB6060 #FB6060 #F8F8F0
+# Light blue colors
+    background #38618C 
+    statusline #FFFFFF
+    separator  #35A7FF
+
+# Monokai colors
+#     focused_workspace  #A3E076 #22272D #FB6060
+#     active_workspace   #292E36 #22272D #FFD569
+#     inactive_workspace #292E36 #22272D #FFD569
+#     urgent_workspace   #FB6060 #FB6060 #F8F8F0
+#     binding_mode       #A3E076 #22272D #FB6060    
+    
+# Light blue colors
+    focused_workspace  #35A7FF #FFFFFF #35A7FF
+    active_workspace   #35A7FF #FFFFFF #35A7FF
+    inactive_workspace #38619C #35A7FF #FFFFFF
+    urgent_workspace   #35A7FF #FFFFFF #35A7FF
     binding_mode       #A3E076 #22272D #FB6060
   }
 }
