@@ -2,7 +2,7 @@
 
 set -e
 
-SOURCE_DIR="$(dirname "$0")/../settings/vscode"
+SOURCE_DIR="$(dirname "$0")/settings/vscode"
 TARGET_DIR="$HOME/.config/Code/User"
 
 echo "Creating VSCode user settings directory at $TARGET_DIR..."
