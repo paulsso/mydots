@@ -45,6 +45,7 @@ install_docker:
 
 install_tools:
 	@./scripts/install_tools.sh
+	@./scripts/install_nerdfonts.sh
 
 configure_vscode_user:
 	@./scripts/configure_vscode_user.sh
