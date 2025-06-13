@@ -26,8 +26,6 @@ if ! grep -q "fzf key-bindings" "$SHELL_RC"; then
   echo "[ -f /usr/share/doc/fzf/examples/completion.bash ] && source /usr/share/doc/fzf/examples/completion.bash" >> "$SHELL_RC"
 fi
 
-exec source "$SHELL_RC"
-
 echo "Installing neovim (modern vim)..."
 sudo apt install -y neovim
 
