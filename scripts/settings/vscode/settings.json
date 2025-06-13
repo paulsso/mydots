@@ -1,0 +1,78 @@
+{
+  "editor.tabSize": 4,
+  "editor.insertSpaces": true,
+  "editor.detectIndentation": false,
+  "files.autoSave": "onFocusChange",
+  "editor.rulers": [80, 120],
+  "editor.wordWrap": "on",
+  "terminal.integrated.fontSize": 14,
+  "terminal.integrated.defaultProfile.linux": "zsh",
+  "terminal.integrated.profiles.linux": {
+    "zsh": {
+      "path": "/bin/zsh"
+    }
+  },
+  "workbench.colorTheme": "Atom One Dark",
+  "files.trimTrailingWhitespace": true,
+  "editor.formatOnSave": true,
+  "editor.renderWhitespace": "all",
+  "editor.codeActionsOnSave": {
+    "source.fixAll": true
+  },
+
+  "python.defaultInterpreterPath": "${env:HOME}/.venvs/default/bin/python",
+  "python.venvPath": "${env:HOME}/.venvs",
+  
+  "[javascript]": {
+    "editor.tabSize": 2
+  },
+  "[html]": {
+    "editor.tabSize": 2
+  },
+  "[conf]": {
+    "editor.tabSize": 2
+  },
+  "[yaml]": {
+    "editor.insertSpaces": false,
+    "editor.tabSize": 4
+  },
+  "[yml]": {
+    "editor.insertSpaces": false,
+    "editor.tabSize": 4
+  },
+  "[python]": {
+    "editor.tabSize": 4,
+    "editor.insertSpaces": false,
+    "python.pythonPath": "${workspaceFolder}/venv/bin/python"
+  },
+  "[cpp]": {
+    "editor.tabSize": 4,
+    "editor.insertSpaces": false 
+  },
+  "[c]": {
+    "editor.tabSize": 4,
+    "editor.insertSpaces": false
+  },
+  "[h]": {
+    "editor.tabSize": 4,
+    "editor.insertSpaces": false
+  },
+  "[hpp]": {
+    "editor.tabSize": 4,
+    "editor.insertSpaces": false
+  },
+  "[hxx]": {
+    "editor.tabSize": 4,
+    "editor.insertSpaces": false
+  },
+  "[cxx]": {
+    "editor.tabSize": 4,
+    "editor.insertSpaces": false
+  },
+  "terminal.integrated.env.linux": {
+    "CC": "/usr/bin/gcc",
+    "CXX": "/usr/bin/g++",
+    "PYTHON_VENV": "${workspaceFolder}/venv"
+  }
+}
+

@@ -1,0 +1,18 @@
+{
+  "recommendations": [
+    "ms-python.python",
+    "ms-python.vscode-pylance",
+    "ms-vscode.cpptools",
+    "ms-vscode.cmake-tools",
+    "twxs.cmake",
+    "eamodio.gitlens",
+    "esbenp.prettier-vscode",
+    "ms-azuretools.vscode-docker",
+    "yzhang.markdown-all-in-one",
+    "redhat.vscode-yaml",
+    "GitHub.copilot",
+    "oderwat.indent-rainbow",
+    "vscode-icons-team.vscode-icons"
+  ]
+}
+
