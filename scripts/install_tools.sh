@@ -26,6 +26,12 @@ if ! grep -q "fzf key-bindings" "$SHELL_RC"; then
   echo "[ -f /usr/share/doc/fzf/examples/completion.bash ] && source /usr/share/doc/fzf/examples/completion.zsh" >> "$SHELL_RC"
 fi
 
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+
+git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+
+
+
 echo "Installing neovim (modern vim)..."
 sudo apt install -y neovim
 
