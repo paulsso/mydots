@@ -22,8 +22,8 @@ fi
 if ! grep -q "fzf key-bindings" "$SHELL_RC"; then
   echo "Configuring fzf keybindings and completion in $SHELL_RC..."
   echo "# fzf configuration" >> "$SHELL_RC"
-  echo "[ -f /usr/share/doc/fzf/examples/key-bindings.bash ] && source /usr/share/doc/fzf/examples/key-bindings.bash" >> "$SHELL_RC"
-  echo "[ -f /usr/share/doc/fzf/examples/completion.bash ] && source /usr/share/doc/fzf/examples/completion.bash" >> "$SHELL_RC"
+  echo "[ -f /usr/share/doc/fzf/examples/key-bindings.bash ] && source /usr/share/doc/fzf/examples/key-bindings.zsh" >> "$SHELL_RC"
+  echo "[ -f /usr/share/doc/fzf/examples/completion.bash ] && source /usr/share/doc/fzf/examples/completion.zsh" >> "$SHELL_RC"
 fi
 
 echo "Installing neovim (modern vim)..."
