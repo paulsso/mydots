@@ -30,10 +30,20 @@ git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:
 
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 
+#!/bin/bash
 
+set -e
 
-echo "Installing neovim (modern vim)..."
-sudo apt install -y neovim
+echo "Installing latest Neovim from GitHub..."
+
+echo "Installing latest Neovim from GitHub..."
+
+curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim-linux-x86_64.appimage
+chmod u+x nvim-linux-x86_64.appimage
+sudo mkdir -p /opt/nvim
+sudo cp -p nvim-linux-x86_64.appimage /opt/nvim/nvim.appimage
+sudo ln -sf /opt/nvim/nvim.appimage /usr/local/bin/nvim
+
 
 echo "Installing GitHub CLI (gh)..."
 type -p curl >/dev/null || sudo apt install curl -y

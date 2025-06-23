@@ -12,7 +12,7 @@
       "path": "/bin/zsh"
     }
   },
-  "workbench.colorTheme": "Atom One Dark",
+  "workbench.colorTheme": "Nord",
   "files.trimTrailingWhitespace": true,
   "editor.formatOnSave": true,
   "editor.renderWhitespace": "all",
@@ -22,7 +22,7 @@
 
   "python.defaultInterpreterPath": "${env:HOME}/.venvs/default/bin/python",
   "python.venvPath": "${env:HOME}/.venvs",
-  
+
   "[javascript]": {
     "editor.tabSize": 2
   },
@@ -47,7 +47,7 @@
   },
   "[cpp]": {
     "editor.tabSize": 4,
-    "editor.insertSpaces": false 
+    "editor.insertSpaces": false
   },
   "[c]": {
     "editor.tabSize": 4,
