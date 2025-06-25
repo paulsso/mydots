@@ -36,6 +36,13 @@ vim.g.python3_host_prog = vim.fn.expand("~/.venvs/default/bin/python")
 -- Save with Ctrl+S
 vim.keymap.set("n", "<C-s>", ":w<CR>", { noremap = true, silent = true })
 
+-- Jump ahead N lines with <leader>N
+vim.keymap.set("n", "<leader>//", "5j", { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>..", "10j", { noremap = true, silent = true })
+
+-- Jump back N lines with <S-leader>N (Shift+leader)
+vim.keymap.set("n", "<leader>??", "5k", { noremap = true, silent = true })
+
 -- Move lines with Alt+J / Alt+K
 vim.keymap.set("n", "<A-j>", ":m .+1<CR>==", { noremap = true, silent = true })
 vim.keymap.set("n", "<A-k>", ":m .-2<CR>==", { noremap = true, silent = true })
