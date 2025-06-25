@@ -18,6 +18,7 @@ sudo apt install -y i3 dmenu xbacklight feh conky
 
 echo "Copy i3 config file"
 cp "$SOURCE_DIR/config" "$TARGET_DIR/config"
+cp -r "$SOURCE_DIR/../wallpapers" "$HOME/.wallpapers"
 
 echo "i3 installation complete."
 
