@@ -33,7 +33,8 @@ pip install \
   virtualenv \
   requests \
   numpy \
-  matplotlib
+  matplotlib \
+  pyright
 
 deactivate
 
