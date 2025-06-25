@@ -12,11 +12,11 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
--- Load plugins
-require("lazy").setup("plugins")
-
 -- Set <leader> key to Space
 vim.g.mapleader = " "
+
+-- Load plugins
+require("lazy").setup("plugins")
 
 -- General settings
 vim.opt.number = true
