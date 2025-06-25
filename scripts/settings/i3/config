@@ -189,4 +189,4 @@ bar {
         status_command i3status
 }
 
-exec --recursive --randomize --bg-fill ~/.wallpapers
+exec feh --recursive --randomize --bg-fill ~/.wallpapers
