@@ -8,8 +8,29 @@ return {
       vim.cmd("colorscheme nord")
     end,
   },
-
-  -- NvimTree (file browser)
+  -- Optional themes (commented out)
+  -- {
+  --   "dracula/vim",
+  --   name = "dracula",
+  --   config = function()
+  --     vim.cmd("colorscheme dracula")
+  --   end,
+  -- },
+  
+  -- {
+  --   "ellisonleao/gruvbox.nvim",
+  --   config = function()
+  --     vim.cmd("colorscheme gruvbox")
+  --   end,
+  -- },
+  
+  -- {
+  --   "tanvirtin/monokai.nvim",
+  --   config = function()
+  --     vim.cmd("colorscheme monokai")
+  --   end,
+  -- },
+  -- File browser
   {
     "nvim-tree/nvim-tree.lua",
     dependencies = { "nvim-tree/nvim-web-devicons" },
@@ -24,10 +45,10 @@ return {
     dependencies = { "nvim-lua/plenary.nvim" },
   },
 
-  -- Spectre
+  -- Spectre (Search & Replace)
   { "nvim-pack/nvim-spectre" },
 
-  -- Git signs
+  -- Git signs (inline gutter signs)
   {
     "lewis6991/gitsigns.nvim",
     config = function()
@@ -53,7 +74,17 @@ return {
     end,
   },
 
-  -- DAP
+  -- GitLens-style Git UI (Neogit)
+  {
+    "TimUntersberger/neogit",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    config = function()
+      require("neogit").setup {}
+      vim.keymap.set("n", "<leader>gg", ":Neogit<CR>", { noremap = true, silent = true, desc = "Neogit (Git UI)" })
+    end,
+  },
+
+  -- DAP (debugging)
   {
     "mfussenegger/nvim-dap",
     dependencies = {
@@ -98,7 +129,7 @@ return {
     end,
   },
 
-  -- Autocomplete
+  -- Autocomplete (cmp)
   {
     "hrsh7th/nvim-cmp",
     dependencies = {
@@ -132,8 +163,29 @@ return {
       }
     end,
   },
-
-  -- Statusline
+  -- Treesitter (syntax highlighting & more)
+  {
+    "nvim-treesitter/nvim-treesitter",
+    build = ":TSUpdate",
+    config = function()
+      require("nvim-treesitter.configs").setup {
+        highlight = { enable = true },
+        indent = { enable = true },
+        ensure_installed = {
+          "bash",
+          "c",
+          "cpp",
+          "python",
+          "lua",
+          "json",
+          "yaml",
+          "markdown",
+          "vimdoc",
+        },
+      }
+    end,
+  },
+  -- Statusline (Lualine)
   {
     "nvim-lualine/lualine.nvim",
     dependencies = { "nvim-tree/nvim-web-devicons" },
