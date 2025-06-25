@@ -32,7 +32,6 @@ vim.opt.clipboard = "unnamedplus" -- enable system clipboard
 vim.g.python3_host_prog = vim.fn.expand("~/.venvs/default/bin/python")
 
 -- === Keymaps ===
-
 -- Save with Ctrl+S
 vim.keymap.set("n", "<C-s>", ":w<CR>", { noremap = true, silent = true })
 
@@ -60,9 +59,6 @@ if ok then
   vim.keymap.set("n", "<leader>fg", builtin.live_grep, {})
 end
 
--- NvimTree keymap
-vim.keymap.set("n", "<C-n>", ":NvimTreeToggle<CR>", { noremap = true, silent = true })
-
 -- Spectre keymap
 local ok_spectre, spectre = pcall(require, "spectre")
 if ok_spectre then
@@ -70,3 +66,10 @@ if ok_spectre then
     spectre.toggle()
   end, { desc = "Toggle Spectre (Search & Replace)", noremap = true, silent = true })
 end
+
+-- Toggle NvimTree
+vim.keymap.set("n", "<C-n>", ":NvimTreeToggle<CR>", { noremap = true, silent = true })
+-- Open file side by side
+vim.keymap.set("n", "<S-O>", ":vsplit<CR>", { noremap = true, silent = true })
+-- Focus NvimTree
+vim.keymap.set("n", "<leader>e", ":NvimTreeFocus<CR>", { noremap = true, silent = true })
