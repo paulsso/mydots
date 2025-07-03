@@ -30,14 +30,39 @@ return {
   --     vim.cmd("colorscheme monokai")
   --   end,
   -- },
-  -- File browser
-  {
-    "nvim-tree/nvim-tree.lua",
-    dependencies = { "nvim-tree/nvim-web-devicons" },
-    config = function()
-      require("nvim-tree").setup {}
-    end,
-  },
+-- Terminal manager
+{
+  "akinsho/toggleterm.nvim",
+  version = "*",
+  config = function()
+    require("toggleterm").setup {
+      direction = "horizontal", -- or "vertical" or "float"
+      open_mapping = [[<C-\>]],
+      shade_terminals = true,
+      start_in_insert = true,
+      insert_mappings = true,
+    }
+
+    -- Optional keymaps
+    vim.keymap.set("n", "<leader>tt", ":ToggleTerm<CR>", { noremap = true, silent = true, desc = "Toggle Terminal" })
+    vim.keymap.set("n", "<leader>tv", ":ToggleTerm direction=vertical size=80<CR>", { noremap = true, silent = true, desc = "Vertical Terminal" })
+    vim.keymap.set("n", "<leader>tf", ":ToggleTerm direction=float<CR>", { noremap = true, silent = true, desc = "Floating Terminal" })
+  end,
+},
+ -- Nvim Tree  
+ {
+  "nvim-tree/nvim-tree.lua",
+  dependencies = { "nvim-tree/nvim-web-devicons" },
+  config = function()
+    require("nvim-tree").setup {
+      on_attach = function(bufnr)
+        local api = require("nvim-tree.api")
+        local opts = { buffer = bufnr, noremap = true, silent = true, nowait = true }
+        vim.keymap.set("n", "<CR>", api.node.open.edit, opts)
+      end,
+    }
+  end,
+},
 
   -- Telescope
   {

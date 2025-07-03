@@ -70,6 +70,6 @@ end
 -- Toggle NvimTree
 vim.keymap.set("n", "<C-n>", ":NvimTreeToggle<CR>", { noremap = true, silent = true })
 -- Open file side by side
-vim.keymap.set("n", "<S-O>", ":vsplit<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "T", ":vsplit<CR>", { noremap = true, silent = true })
 -- Focus NvimTree
 vim.keymap.set("n", "<leader>e", ":NvimTreeFocus<CR>", { noremap = true, silent = true })
