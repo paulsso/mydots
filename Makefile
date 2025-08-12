@@ -47,6 +47,9 @@ install_tools:
 	@./scripts/install_tools.sh
 	@./scripts/install_nerdfonts.sh
 
+install_chromium:
+	@./scripts/install_chromium_ungoogled.sh
+
 configure_vscode_user:
 	@./scripts/configure_vscode_user.sh
 
