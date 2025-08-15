@@ -1,0 +1,9 @@
+Host *
+  PubkeyAuthentication yes
+  IdentitiesOnly yes
+  IdentityAgent ~/.ssh/agent
+  AddKeysToAgent yes
+  ServerAliveInterval 60
+  ServerAliveCountMax 3
+  HostKeyAlgorithms ssh-ed25519,ecdsa-sha2-nistp256
+  Ciphers chacha20-poly1305@openssh.com,aes256-gcm@openssh.com,aes128-gcm@openssh.com

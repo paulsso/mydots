@@ -2,7 +2,7 @@
 
 SHELL := /bin/bash
 
-.PHONY: help all install_i3 install_zsh configure_i3 configure_ohmyzsh install_cpp install_python install_docker install_tools configure_vscode_user configure_nvim 
+.PHONY: help all install_i3 install_zsh configure_i3 configure_ohmyzsh install_cpp install_python install_docker install_tools configure_vscode_user configure_nvim harden
 
 # Default command
 help:
@@ -19,8 +19,9 @@ help:
 	@echo "  install_tools        - Install misc tools like VSCode, fzf, etc."
 	@echo "  configure_vscode_user - Copy VSCode user config files"
 	@echo "  configure_nvim       - Setup Neovim with sane defaults"
+	@echo "  harden       		  - Setup and configuration to increase system security"
 
-all: install_python install_cpp install_i3 install_zsh install_docker install_tools configure_ohmyzsh configure_vscode_user configure_nvim
+all: install_python install_cpp install_i3 install_zsh install_docker install_tools configure_ohmyzsh configure_vscode_user configure_nvim harden
 
 install_i3:
 	@./scripts/install_i3.sh
@@ -55,3 +56,6 @@ configure_vscode_user:
 
 configure_nvim:
 	@./scripts/configure_nvim.sh
+
+harden:
+	@./scripts/harden.sh
